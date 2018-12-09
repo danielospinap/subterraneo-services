@@ -11,11 +11,13 @@ import javax.validation.constraints.NotEmpty;
 public class Edge implements Serializable {
 
 	@Id
+	@ManyToOne
 	@Column(name = "node_a")
 	@NotEmpty(message = "Please provide a node")
 	private Node nodeA;
 	
 	@Id
+	@ManyToOne
 	@Column(name = "node_b")
 	@NotEmpty(message = "Please provide a node")
 	private Node nodeB;
