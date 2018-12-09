@@ -12,13 +12,11 @@ public class Node implements Serializable {
 
 	@Id
 	@ManyToOne
-	@Column(name = "route")
 	@NotEmpty(message = "Please provide a route")
 	private Route route;
 	
 	@Id
 	@ManyToOne
-	@Column(name = "station")
 	@NotEmpty(message = "Please provide a station")
 	private Station station;
 	
