@@ -20,15 +20,20 @@ public class Edge {
 	@NotEmpty(message = "Please provide a node")
 	private Node nodeB;
 	
+	@Column
+	private double weight;
+	
 	public Edge (
 			int id,
 			@NotEmpty(message = "Please provide a node") Node nodeA,
-			@NotEmpty(message = "Please provide a node") Node nodeB
+			@NotEmpty(message = "Please provide a node") Node nodeB,
+			double weight
 			) {
 		super();
 		this.id = id;
 		this.nodeA = nodeA;
 		this.nodeB = nodeB;
+		this.weight = weight;
 	}
 	
 	public Edge () {
@@ -57,6 +62,14 @@ public class Edge {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
 	}
 
 	
