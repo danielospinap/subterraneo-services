@@ -1,7 +1,5 @@
 package com.metro.subterraneo.model;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
