@@ -6,31 +6,35 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@IdClass(Node.class)
 @Table(name = "node")
-public class Node implements Serializable {
+public class Node {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "node_id")
+	private int id;
+	
 	@ManyToOne
 	@NotEmpty(message = "Please provide a route")
 	private Route route;
 	
-	@Id
 	@ManyToOne
 	@NotEmpty(message = "Please provide a station")
 	private Station station;
 	
 	public Node (
+			int id,
 			@NotEmpty(message = "Please provide a route") Route route,
 			@NotEmpty(message = "Please provide a station") Station station
 			) {
 		super();
+		this.id = id;
 		this.station = station;
 		this.route = route;
 	}
 	
 	public Node () {
-		super();
+		
 	}
 
 	public Route getRoute() {
@@ -47,6 +51,14 @@ public class Node implements Serializable {
 
 	public void setStation(Station station) {
 		this.station = station;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	

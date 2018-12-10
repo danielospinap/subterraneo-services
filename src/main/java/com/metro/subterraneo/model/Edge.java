@@ -6,25 +6,29 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@IdClass(Edge.class)
 @Table(name = "edge")
-public class Edge implements Serializable {
+public class Edge {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "edge_id")
+	private int id;
+	
 	@ManyToOne
 	@NotEmpty(message = "Please provide a node")
 	private Node nodeA;
 	
-	@Id
 	@ManyToOne
 	@NotEmpty(message = "Please provide a node")
 	private Node nodeB;
 	
 	public Edge (
+			int id,
 			@NotEmpty(message = "Please provide a node") Node nodeA,
 			@NotEmpty(message = "Please provide a node") Node nodeB
 			) {
 		super();
+		this.id = id;
 		this.nodeA = nodeA;
 		this.nodeB = nodeB;
 	}
@@ -47,6 +51,14 @@ public class Edge implements Serializable {
 
 	public void setNodeB(Node nodeB) {
 		this.nodeB = nodeB;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	
