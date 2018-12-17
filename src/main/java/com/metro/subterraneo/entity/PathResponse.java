@@ -7,12 +7,12 @@ import com.metro.subterraneo.model.Node;
 public class PathResponse {
 
 	private List<Node> path;
-	private double weight;
+	private double time;
 	
-	public PathResponse(List<Node> path, double weight) {
+	public PathResponse(List<Node> path, double time) {
 		super();
 		this.path = path;
-		this.weight = weight;
+		this.time = time;
 	}
 	public List<Node> getPaht() {
 		return path;
@@ -21,10 +21,10 @@ public class PathResponse {
 		this.path = path;
 	}
 	public double getWeight() {
-		return weight;
+		return time;
 	}
-	public void setWeight(double weight) {
-		this.weight = weight;
+	public void setWeight(double time) {
+		this.time = time;
 	}
 	
 	
