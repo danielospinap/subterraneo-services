@@ -16,6 +16,7 @@ import com.metro.subterraneo.model.*;
 import com.metro.subterraneo.repository.EdgeRepository;
 import com.metro.subterraneo.repository.NodeRepository;
 import com.metro.subterraneo.repository.RouteRepository;
+import com.metro.subterraneo.repository.StationRepository;
 
  
 
@@ -24,15 +25,18 @@ public class PathService {
 	private EdgeRepository edgeRepository;
 	private RouteRepository routeRepository;
 	private NodeRepository nodeRepository;
+	private StationRepository stationRepository;
 	
 	@Autowired
 	public PathService(
 			EdgeRepository edgeRepository,
 			RouteRepository routeRepository,
-			NodeRepository nodeRepository) {
+			NodeRepository nodeRepository,
+			StationRepository stationRepository) {
 		this.edgeRepository = edgeRepository;
 		this.routeRepository = routeRepository;
 		this.nodeRepository = nodeRepository;
+		this.stationRepository = stationRepository;
 	}
 	
 	public List<Edge> findAllEdges() {
@@ -42,6 +46,11 @@ public class PathService {
 	public List<Route> findAllRoutes() {
 		return routeRepository.findAll();
 	}
+	
+	public List<Station> findAllStations() {
+		return stationRepository.findAll();
+	}
+	
 	
 	public List<GraphPath<Node, DefaultWeightedEdge>> findShortestPath(String fromStation, String toStation, int maxNumberOfPaths) {
 		List<Node> nodes = nodeRepository.findAll();

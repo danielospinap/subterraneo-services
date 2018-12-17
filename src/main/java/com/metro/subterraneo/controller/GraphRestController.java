@@ -18,6 +18,7 @@ import com.metro.subterraneo.entity.PathResponse;
 import com.metro.subterraneo.model.Edge;
 import com.metro.subterraneo.model.Node;
 import com.metro.subterraneo.model.Route;
+import com.metro.subterraneo.model.Station;
 import com.metro.subterraneo.service.PathService;
 
 @CrossOrigin(origins="*")
@@ -41,5 +42,10 @@ public class GraphRestController {
 		}
 		
 		return new ResponseEntity<List<PathResponse>>(pathsForResponse, HttpStatus.OK);
+	}
+	
+	@GetMapping("/stations")
+	public List<Station> allStations() {
+		return this.pathService.findAllStations();
 	}
 }
