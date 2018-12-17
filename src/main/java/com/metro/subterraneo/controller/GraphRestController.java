@@ -29,19 +29,10 @@ public class GraphRestController {
 	@Autowired
 	private PathService pathService;
 
-	@GetMapping(value= "/{from}/{to}/{paths}")
-	public ResponseEntity<List<PathResponse>> paths(@PathVariable String from, @PathVariable String to, @PathVariable int paths) {
-		List<GraphPath<Node,DefaultWeightedEdge>> graphPaths = pathService.findShortestPath(from, to, paths);
-		
-		List<PathResponse> pathsForResponse = new ArrayList<PathResponse>();
-		for (int i = 0; i < graphPaths.size(); i++) {
-			List<Node> path = graphPaths.get(i).getVertexList();
-			double weight = graphPaths.get(i).getWeight() - 2;
-			
-			pathsForResponse.add(new PathResponse(path, weight));
-		}
-		
-		return new ResponseEntity<List<PathResponse>>(pathsForResponse, HttpStatus.OK);
+	@GetMapping(value= "/{from}/{to}/{numberOfPaths}")
+	public ResponseEntity<List<PathResponse>> paths(@PathVariable String from, @PathVariable String to, @PathVariable int numberOfPaths) {
+		List<PathResponse> paths = this.pathService.findShortestPath(from, to, numberOfPaths);
+		return new ResponseEntity<List<PathResponse>>(paths, HttpStatus.OK);
 	}
 	
 	@GetMapping("/stations")
