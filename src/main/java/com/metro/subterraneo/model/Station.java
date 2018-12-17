@@ -15,6 +15,12 @@ public class Station {
 	@Column(name = "name")
 	@NotEmpty(message = "Please provide a name")
 	private String name;
+
+	@Column(name = "posX")
+	private int posX;
+	
+	@Column(name = "posY")
+	private int posY;
 	
 	public Station (
 			int id,
@@ -51,5 +57,22 @@ public class Station {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+	
 	
 }
