@@ -20,10 +20,10 @@ public class PathResponse {
 	public void setPaht(List<Node> path) {
 		this.path = path;
 	}
-	public double getWeight() {
+	public double getTime() {
 		return time;
 	}
-	public void setWeight(double time) {
+	public void setTime(double time) {
 		this.time = time;
 	}
 	
