@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.metro.subterraneo.entity.MapResponse;
 import com.metro.subterraneo.entity.PathResponse;
 import com.metro.subterraneo.model.Edge;
 import com.metro.subterraneo.model.Node;
@@ -38,5 +39,10 @@ public class GraphRestController {
 	@GetMapping("/stations")
 	public List<Station> allStations() {
 		return this.pathService.findAllStations();
+	}
+	
+	@GetMapping("/map")
+	public MapResponse fullMap() {
+		return this.pathService.getFullMap();
 	}
 }
