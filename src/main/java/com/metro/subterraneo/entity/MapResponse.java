@@ -15,6 +15,11 @@ public class MapResponse {
 		this.edges = edges;
 	}
 
+	public MapResponse() {
+		super();
+	}
+	
+
 	public List<Station> getStations() {
 		return stations;
 	}
