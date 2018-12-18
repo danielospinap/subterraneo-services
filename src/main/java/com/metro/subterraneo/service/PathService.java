@@ -29,6 +29,10 @@ public class PathService {
 	private NodeRepository nodeRepository;
 	private StationRepository stationRepository;
 	
+	private List<Edge> edges;
+	private List<Station> stations;
+	private List<Node> nodes;
+	
 	@Autowired
 	public PathService(
 			EdgeRepository edgeRepository,
@@ -39,26 +43,20 @@ public class PathService {
 		this.routeRepository = routeRepository;
 		this.nodeRepository = nodeRepository;
 		this.stationRepository = stationRepository;
-	}
-	
-	public List<Edge> findAllEdges() {
-		return edgeRepository.findAll();
-	}
-	
-	public List<Route> findAllRoutes() {
-		return routeRepository.findAll();
+		
+		this.edges = edgeRepository.findAll();
+		this.stations = stationRepository.findAll();
+		this.nodes = nodeRepository.findAll();
 	}
 	
 	public List<Station> findAllStations() {
-		return stationRepository.findAll();
+		return this.stations;
 	}
 	
 	
 	public List<PathResponse> findShortestPath(String fromStation, String toStation, int maxNumberOfPaths) {
-		List<Node> nodes = nodeRepository.findAll();
-		List<Edge> edges = edgeRepository.findAll();
 		
-		Graph<Node, DefaultWeightedEdge> routesMap = this.createMap(nodes, edges);
+		Graph<Node, DefaultWeightedEdge> routesMap = this.createMap(this.nodes, this.edges);
 				
 		Node fromNode = this.findDefaultNode(routesMap, fromStation);
 		Node toNode = this.findDefaultNode(routesMap, toStation);
@@ -79,7 +77,16 @@ public class PathService {
 		}
 		
 		for (Edge edge : edges) {
-			DefaultWeightedEdge weightedEdge = routesMap.addEdge(edge.getNodeA(), edge.getNodeB());
+			Node nodeA = new Node();
+			Node nodeB = new Node();
+			for(int j = 0; j < this.nodes.size(); j ++) {
+				if(nodes.get(j).getId() == edge.getNodeA().getId()) {
+					nodeA = nodes.get(j);
+				} else if(nodes.get(j).getId() == edge.getNodeB().getId()) {
+					nodeB = nodes.get(j);
+				} 
+			}
+			DefaultWeightedEdge weightedEdge = routesMap.addEdge(nodeA, nodeB);
 			routesMap.setEdgeWeight(weightedEdge, edge.getWeight());
 		}
 		
