@@ -13,6 +13,8 @@ import org.jgrapht.alg.shortestpath.KShortestSimplePaths;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
 
+import com.metro.subterraneo.entity.EdgeResponse;
+import com.metro.subterraneo.entity.MapResponse;
 import com.metro.subterraneo.entity.PathResponse;
 import com.metro.subterraneo.model.*;
 import com.metro.subterraneo.repository.EdgeRepository;
@@ -139,4 +141,39 @@ public class PathService {
 		
 		return cleanedPath;
 	}
+	
+	
+	public MapResponse getFullMap() {
+		MapResponse map = new MapResponse();
+		map.setStations(this.stations);
+		
+		map.setEdges(this.ConvertEdgesintoEdgesResponse(this.edges));
+		
+		return map;
+	}
+	
+	public List<EdgeResponse> ConvertEdgesintoEdgesResponse(List<Edge> edges) {
+		List<EdgeResponse> newEdges = new ArrayList<EdgeResponse>();
+		
+		for (Edge edge : edges) {
+			if(edge.getNodeA().getRoute().getId() != 0 && edge.getNodeB().getId() != 0) {
+				newEdges.add(new EdgeResponse(
+						edge.getNodeA().getStation().getPosX(), 
+						edge.getNodeA().getStation().getPosY(),
+						edge.getNodeB().getStation().getPosX(), 
+						edge.getNodeB().getStation().getPosY(), 
+						edge.getNodeA().getRoute().getColor()));
+			}
+			
+		}
+		
+		return newEdges;
+	}
 }
+
+
+
+
+
+
+
