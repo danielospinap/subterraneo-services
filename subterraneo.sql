@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 11, 2018 at 04:04 AM
+-- Generation Time: Dec 19, 2018 at 12:25 AM
 -- Server version: 8.0.13
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -276,29 +276,31 @@ INSERT INTO `route` (`route_id`, `color`, `name`) VALUES
 
 CREATE TABLE `station` (
   `station_id` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL
+  `name` varchar(255) DEFAULT NULL,
+  `posx` int(11) DEFAULT NULL,
+  `posy` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `station`
 --
 
-INSERT INTO `station` (`station_id`, `name`) VALUES
-(1, '1'),
-(2, '2'),
-(3, '3'),
-(4, '4'),
-(5, '5'),
-(6, '6'),
-(7, '7'),
-(8, '8'),
-(9, '9'),
-(10, '10'),
-(11, '11'),
-(12, '12'),
-(13, '13'),
-(14, '14'),
-(15, '15');
+INSERT INTO `station` (`station_id`, `name`, `posx`, `posy`) VALUES
+(1, '1', 40, 60),
+(2, '2', 140, 80),
+(3, '3', 240, 70),
+(4, '4', 370, 40),
+(5, '5', 470, 40),
+(6, '6', 500, 120),
+(7, '7', 310, 130),
+(8, '8', 450, 180),
+(9, '9', 230, 190),
+(10, '10', 50, 110),
+(11, '11', 120, 200),
+(12, '12', 70, 290),
+(13, '13', 210, 300),
+(14, '14', 360, 250),
+(15, '15', 550, 270);
 
 -- --------------------------------------------------------
 
