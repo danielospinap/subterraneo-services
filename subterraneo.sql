@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 19, 2018 at 12:25 AM
+-- Generation Time: Dec 19, 2018 at 06:14 AM
 -- Server version: 8.0.13
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -143,8 +143,8 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(2),
-(2);
+(10),
+(10);
 
 -- --------------------------------------------------------
 
@@ -224,6 +224,33 @@ INSERT INTO `node` (`node_id`, `route_route_id`, `station_station_id`) VALUES
 (59, 0, 15),
 (60, 3, 15),
 (61, 5, 15);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `query`
+--
+
+CREATE TABLE `query` (
+  `query_id` int(11) NOT NULL,
+  `times` int(11) DEFAULT NULL,
+  `destination_station_station_id` int(11) DEFAULT NULL,
+  `origin_station_station_id` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `query`
+--
+
+INSERT INTO `query` (`query_id`, `times`, `destination_station_station_id`, `origin_station_station_id`) VALUES
+(2, 4, 10, 1),
+(3, 1, 11, 1),
+(4, 1, 11, 7),
+(5, 3, 11, 8),
+(6, 7, 8, 1),
+(7, 1, 9, 1),
+(8, 1, 14, 10),
+(9, 1, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -361,6 +388,14 @@ ALTER TABLE `node`
   ADD PRIMARY KEY (`node_id`),
   ADD KEY `FK8gqsaopxi1ycgtv3eg3rfo5w2` (`route_route_id`),
   ADD KEY `FKtgasrlhk8hlxmxi39nuioi5v7` (`station_station_id`);
+
+--
+-- Indexes for table `query`
+--
+ALTER TABLE `query`
+  ADD PRIMARY KEY (`query_id`),
+  ADD KEY `FKcxl7yohakxbmmme6nqmdbymy4` (`destination_station_station_id`),
+  ADD KEY `FK9txky6v6dlfqocyo1d6c9dtnd` (`origin_station_station_id`);
 
 --
 -- Indexes for table `role`
