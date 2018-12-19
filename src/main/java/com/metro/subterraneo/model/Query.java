@@ -40,6 +40,11 @@ public class Query {
 		this.destinationStation = destinationStation;
 		this.times = 0;
 	}
+	
+	public Query() {
+		super();
+	}
+	
 
 	public int getId() {
 		return id;
