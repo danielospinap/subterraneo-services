@@ -18,6 +18,7 @@ import com.metro.subterraneo.entity.MapResponse;
 import com.metro.subterraneo.entity.PathResponse;
 import com.metro.subterraneo.model.Edge;
 import com.metro.subterraneo.model.Node;
+import com.metro.subterraneo.model.Query;
 import com.metro.subterraneo.model.Route;
 import com.metro.subterraneo.model.Station;
 import com.metro.subterraneo.service.PathService;
@@ -44,5 +45,10 @@ public class GraphRestController {
 	@GetMapping("/map")
 	public MapResponse fullMap() {
 		return this.pathService.getFullMap();
+	}
+	
+	@GetMapping("/history")
+	public List<Query> history() {
+		return this.pathService.queryHistory();
 	}
 }

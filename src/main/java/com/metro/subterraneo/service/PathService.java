@@ -178,15 +178,19 @@ public class PathService {
 		return newEdges;
 	}
 	
+
 	public void saveQuery(Station origin, Station destination) {
 		List<Query> queries = this.queryRepository.findByOriginStationAndDestinationStation(origin, destination);
 		if(queries.isEmpty()) {
-			this.queryRepository.save(new Query(origin, destination));
+			this.queryRepository.save(new Query(origin, destination, 1));
 		} else {
 			Query q = queries.get(0);
 			q.setTimes(q.getTimes() + 1);
 			this.queryRepository.save(q);
 		}
+	}
+	public List<Query> queryHistory() {
+		return this.queryRepository.findAllByOrderByTimesDesc();
 	}
 }
 
