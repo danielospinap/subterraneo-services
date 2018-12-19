@@ -44,5 +44,6 @@ public class GraphRestController {
 	@GetMapping("/map")
 	public MapResponse fullMap() {
 		return this.pathService.getFullMap();
+
 	}
 }
