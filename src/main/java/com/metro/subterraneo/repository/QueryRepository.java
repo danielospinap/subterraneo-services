@@ -13,4 +13,6 @@ public interface QueryRepository extends JpaRepository<Query, Long> {
 	
 	public List<Query> findByOriginStationAndDestinationStation(Station origin, Station destination);
 
+	public List<Query> findAllByOrderByTimesAsc();
+
 }
