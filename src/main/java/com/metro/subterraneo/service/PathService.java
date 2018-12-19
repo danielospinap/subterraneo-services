@@ -19,6 +19,7 @@ import com.metro.subterraneo.entity.PathResponse;
 import com.metro.subterraneo.model.*;
 import com.metro.subterraneo.repository.EdgeRepository;
 import com.metro.subterraneo.repository.NodeRepository;
+import com.metro.subterraneo.repository.QueryRepository;
 import com.metro.subterraneo.repository.RouteRepository;
 import com.metro.subterraneo.repository.StationRepository;
 
@@ -30,6 +31,7 @@ public class PathService {
 	private RouteRepository routeRepository;
 	private NodeRepository nodeRepository;
 	private StationRepository stationRepository;
+	private QueryRepository queryRepository;
 	
 	private List<Edge> edges;
 	private List<Station> stations;
@@ -40,11 +42,13 @@ public class PathService {
 			EdgeRepository edgeRepository,
 			RouteRepository routeRepository,
 			NodeRepository nodeRepository,
-			StationRepository stationRepository) {
+			StationRepository stationRepository,
+			QueryRepository queryRepository) {
 		this.edgeRepository = edgeRepository;
 		this.routeRepository = routeRepository;
 		this.nodeRepository = nodeRepository;
 		this.stationRepository = stationRepository;
+		this.queryRepository = queryRepository;
 		
 		this.edges = edgeRepository.findAll();
 		this.stations = stationRepository.findAll();
@@ -66,7 +70,11 @@ public class PathService {
 		KShortestSimplePaths<Node, DefaultWeightedEdge> shortestPathCalculator = new KShortestSimplePaths<>(routesMap);
 		List<GraphPath<Node, DefaultWeightedEdge>> paths = shortestPathCalculator.getPaths(fromNode, toNode, maxNumberOfPaths);
 		
-		return this.simplifyShortestPathsData(paths);
+		List<PathResponse> simplifiedPaths = this.simplifyShortestPathsData(paths);
+		
+		this.saveQuery(fromNode.getStation(), toNode.getStation());
+		
+		return simplifiedPaths;
 	}
 	
 	//Create a graph of the library jgrapht with the data of the map
@@ -168,6 +176,17 @@ public class PathService {
 		}
 		
 		return newEdges;
+	}
+	
+	public void saveQuery(Station origin, Station destination) {
+		List<Query> queries = this.queryRepository.findByOriginStationAndDestinationStation(origin, destination);
+		if(queries.isEmpty()) {
+			this.queryRepository.save(new Query(origin, destination));
+		} else {
+			Query q = queries.get(0);
+			q.setTimes(q.getTimes() + 1);
+			this.queryRepository.save(q);
+		}
 	}
 }
 
